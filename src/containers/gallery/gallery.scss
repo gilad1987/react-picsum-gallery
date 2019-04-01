@@ -1,0 +1,28 @@
+.Gallery {
+
+  max-width: 1280px;
+  margin: 0 auto;
+
+  .Images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 9px -25px;
+  }
+}
+
+.Picture{
+  margin-bottom: 29px;
+  img{
+    min-width: 300px;
+    min-height: 300px;
+  }
+
+  &.grey{
+    filter: grayscale(100%);
+  }
+}
+
+.GetImages-button{
+  margin-right: 20px;
+}

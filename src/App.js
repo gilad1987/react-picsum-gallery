@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import GalleryStore from "./containers/gallery/gallery.store";
 import {Provider} from "mobx-react";
 import Gallery from "./containers/gallery/Gallery";

@@ -14,20 +14,5 @@ code {
 }
 
 
-.Gallery{
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.Gallery .Images{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
 
-.Picture{
-  margin-bottom: 29px;
-}
-.Picture.grey{
-  filter: grayscale(100%);
-}
 

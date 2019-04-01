@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {inject, observer} from "mobx-react";
 import Picture from "./Picture";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {Checkbox, TextField} from "@material-ui/core";
+import {Checkbox, TextField, Button} from "@material-ui/core";
 import {decorate, observable, action, computed} from "mobx";
+
+import './gallery.scss';
 
 class Gallery extends Component {
 
@@ -14,7 +16,7 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        this.props.galleryStore.getImages();
+        this.props.galleryStore.fetchImages();
     }
 
     handelChangeGreyMode = () => {
@@ -26,16 +28,21 @@ class Gallery extends Component {
     };
 
     get images() {
-        if(this.filter===''){
-            return this.props.galleryStore.images;
+        if (this.filter === '') {
+            return this.props.galleryStore.currentImages;
         }
-        return this.props.galleryStore.images.filter(image => image.author === this.filter);
+
+        return this.props.galleryStore.currentImages.filter(image => image.author.toLowerCase().indexOf(this.filter.toLowerCase()) > -1);
+    }
+
+    setRandomImages = () => {
+        this.props.galleryStore.setRandomImages();
     }
 
     render() {
 
         const images = this.images.map(image =>
-            <Picture key={image.id}
+            <Picture key={image.key}
                      picture={image}
                      isGreyMode={this.props.galleryStore.isGrayMode}/>);
 
@@ -56,6 +63,12 @@ class Gallery extends Component {
                         onChange={this.handelChangeGreyMode}
                         value="Grey filter"
                     />} label="Grey filter"/>
+
+                    <div>
+                        <Button variant="contained" className={'GetImages-button'} color="primary" onClick={this.setRandomImages}>
+                            Get images
+                        </Button>
+                    </div>
                 </header>
 
                 <section className="Images">
