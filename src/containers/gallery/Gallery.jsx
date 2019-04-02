@@ -32,7 +32,13 @@ class Gallery extends Component {
             return this.props.galleryStore.currentImages;
         }
 
-        return this.props.galleryStore.currentImages.filter(image => image.author.toLowerCase().indexOf(this.filter.toLowerCase()) > -1);
+
+        return this.props.galleryStore.currentImages.filter(image => {
+            const [firstName, lastName] = image.author.split(' ');
+
+            return (firstName && firstName.toLowerCase().indexOf(this.filter.toLowerCase()) === 0) ||
+                (lastName && lastName.toLowerCase().indexOf(this.filter.toLowerCase()) === 0 )
+        });
     }
 
     setRandomImages = () => {
@@ -65,7 +71,8 @@ class Gallery extends Component {
                     />} label="Grey filter"/>
 
                     <div>
-                        <Button variant="contained" className={'GetImages-button'} color="primary" onClick={this.setRandomImages}>
+                        <Button variant="contained" className={'GetImages-button'} color="primary"
+                                onClick={this.setRandomImages}>
                             Get images
                         </Button>
                     </div>
